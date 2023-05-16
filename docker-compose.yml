@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'projeto'
+      MYSQL_ROOT_PASSWORD: 'masterkey'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - './projeto:/var/lib/mysql'
+    
