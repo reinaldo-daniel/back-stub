@@ -5,13 +5,20 @@
     "type": "module",
     "license": "MIT",
     "scripts": {
-        "dev": "nodemon index.js",
-        "start": "node index.js"
+        "dev": "nodemon ./src/index.js",
+        "start": "node ./src/index.js",
+        "migrate:make": "knex migrate:make --knexfile ./database/knexfile.js",
+        "migrate:latest": "knex migrate:latest --knexfile ./database/knexfile.js",
+        "migrate:rollback": "knex migrate:rollback --knexfile ./database/knexfile.js",
+        "seed:make": "knex seed:make --knexfile ./database/knexfile.js",
+        "seed:run": "knex seed:run --knexfile ./database/knexfile.js"
     },
     "dependencies": {
+        "dotenv": "^16.0.3",
         "express": "^4.18.2",
-        "knex": "^2.4.2",
-        "mysql2": "^3.3.1"
+        "knex": "2.3.0",
+        "mysql2": "^3.3.1",
+        "objection": "^3.0.1"
     },
     "devDependencies": {
         "eslint": "^7.32.0 || ^8.2.0",
