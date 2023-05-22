@@ -34,8 +34,6 @@ const knexConfig = {
   },
 };
 
-const knex = Knex(knexConfig);
+Model.knex(knexConfig);
 
-Model.knex(knex);
-
-export default knex;
+export default knexConfig;
