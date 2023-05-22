@@ -3,8 +3,10 @@ export const up = function up(knex) {
         table.bigIncrements("id")
             .primary()
             .notNullable();
+
         table.string("name", 255)
             .notNullable();
+
         table.bigInteger("room_id")
             .unsigned()
             .notNullable()
