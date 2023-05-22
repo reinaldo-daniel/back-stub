@@ -1,16 +1,18 @@
+import cors from "cors";
 import express from "express";
+import bodyParser from "body-parser";
 import appConfig from "./config/appConfig.js";
+
+import presences from "./domains/presence/routes.js";
+import schedules from "./domains/schedule/routes.js";
 
 const app = express();
 
-app.get("/", (request, response, next) => {
-    try {
-        response.status(200)
-            .json({ sucess: "entrou" });
-    } catch (error) {
-        next(error);
-    }
-});
+app.use(cors());
+app.use(bodyParser.json());
+
+app.use("/presence", presences);
+app.use("/schedule", schedules);
 
 app.listen(appConfig.appPort, () => {
     // eslint-disable-next-line no-console
