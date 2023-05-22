@@ -4,7 +4,6 @@ export const up = function up(knex) {
             .primary()
             .notNullable();
 
-
         table.string("first_name", 255)
             .notNullable();
 
