@@ -1,10 +1,8 @@
 import { Router } from "express";
+import controller from "./controllers.js";
 
 const router = Router();
 
-router.get("/", (request, response) => {
-    response.status(200)
-        .send({ teste: "rota schedule" });
-});
+router.get("/", controller.schedule);
 
 export default router;

@@ -10,15 +10,14 @@ module.exports = {
         ecmaVersion: "latest",
         sourceType: "module",
     },
-    ignorePatterns: [
-        "index.js",
-        "knexfile.js",
-    ],
     rules: {
         "max-len": [
             "error",
             200,
         ],
+        "import/extensions": ["error", "ignorePackages", {
+            js: "always",
+        }],
         quotes: [
             "error",
             "double",
