@@ -10,7 +10,7 @@ export const up = function up(knex) {
             .references("id")
             .inTable("user_discipline");
 
-        table.float("note")
+        table.float("note", 4, 2)
             .unsigned()
             .notNullable();
     });
