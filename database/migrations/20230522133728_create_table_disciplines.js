@@ -1,5 +1,5 @@
 export const up = function up(knex) {
-    return knex.schema.createTable("discipline", (table) => {
+    return knex.schema.createTable("disciplines", (table) => {
         table.bigIncrements("id")
             .primary()
             .notNullable();
@@ -11,10 +11,10 @@ export const up = function up(knex) {
             .unsigned()
             .notNullable()
             .references("id")
-            .inTable("room");
+            .inTable("rooms");
     });
 };
 
 export const down = function down(knex) {
-    return knex.schema.dropTable("discipline");
+    return knex.schema.dropTable("disciplines");
 };
