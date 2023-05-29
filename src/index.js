@@ -3,7 +3,7 @@ import express from "express";
 import appConfig from "./config/appConfig.js";
 
 import presences from "./domains/presence/routes.js";
-import schedules from "./domains/schedule/routes.js";
+import schedules from "./domains/scheduleControl/routes.js";
 
 const app = express();
 
