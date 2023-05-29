@@ -1,12 +1,14 @@
-async function schedule(request, response, next) {
+// eslint-disable-next-line camelcase
+async function student_note(request, response, next) {
     try {
         response.status(200)
-            .json({ teste: "acesso ao controller schedule." });
+            .json({ teste: "acesso ao controller student_note." });
     } catch (error) {
         next(error);
     }
 }
 
 export default {
-    schedule,
+    // eslint-disable-next-line camelcase
+    student_note,
 };

@@ -1,8 +1,8 @@
 import { Model } from "objection";
 
-class StudentNote extends Model {
+class UserDiscipline extends Model {
     static get tableName() {
-        return "students_notes";
+        return "user_discipline";
     }
 
     static get idColumn() {
@@ -10,4 +10,4 @@ class StudentNote extends Model {
     }
 }
 
-export default StudentNote;
+export default UserDiscipline;
