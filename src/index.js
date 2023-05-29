@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 import cors from "cors";
 import express from "express";
-import bodyParser from "body-parser";
+
 import appConfig from "./config/appConfig.js";
 
 import presences from "./domains/presence/routes.js";
@@ -8,6 +9,7 @@ import schedules from "./domains/schedule/routes.js";
 
 import student_note from "./domains/student_notes/model.js";
 import user_discipline from "./domains/user_disciplines/model.js";
+
 const app = express();
 
 app.use(cors());
