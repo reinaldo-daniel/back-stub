@@ -1,5 +1,5 @@
 export const up = function up(knex) {
-    return knex.schema.createTable("student_note", (table) => {
+    return knex.schema.createTable("presences", (table) => {
         table.bigIncrements("id")
             .primary()
             .notNullable();
@@ -8,14 +8,21 @@ export const up = function up(knex) {
             .unsigned()
             .notNullable()
             .references("id")
-            .inTable("user_discipline");
+            .inTable("users_disciplines");
 
-        table.float("note", 4, 2)
-            .unsigned()
+        table.boolean("first_hour");
+
+        table.boolean("second_hour");
+
+        table.boolean("third_hour");
+
+        table.boolean("fourth_hour");
+
+        table.date("date")
             .notNullable();
     });
 };
 
 export const down = function down(knex) {
-    return knex.schema.dropTable("student_note");
+    return knex.schema.dropTable("presences");
 };
