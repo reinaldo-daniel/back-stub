@@ -1,11 +1,12 @@
-import express from "express";
 import cors from "cors";
-import users from "./domains/users/routes.js";
-import rooms from "./domains/rooms/routes.js";
+import express from "express";
+
+import appConfig from "./config/appConfig.js";
 import disciplines from "./domains/disciplines/routes.js";
 import presences from "./domains/presence/routes.js";
+import rooms from "./domains/rooms/routes.js";
 import schedules from "./domains/scheduleControl/routes.js";
-import appConfig from "./config/appConfig.js";
+import users from "./domains/users/routes.js";
 
 const app = express();
 
