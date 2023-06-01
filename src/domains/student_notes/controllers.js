@@ -1,5 +1,4 @@
-// eslint-disable-next-line camelcase
-async function student_note(request, response, next) {
+async function studentNote(request, response, next) {
     try {
         response.status(200)
             .json({ teste: "acesso ao controller student_note." });
@@ -10,5 +9,5 @@ async function student_note(request, response, next) {
 
 export default {
     // eslint-disable-next-line camelcase
-    student_note,
+    studentNote,
 };

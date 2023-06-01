@@ -9,5 +9,5 @@ async function user_discipline(request, response, next) {
 }
 
 export default {
- user_discipline,
+    user_discipline,
 };

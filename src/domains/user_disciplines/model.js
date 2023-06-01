@@ -2,7 +2,7 @@ import { Model } from "objection";
 
 class UserDiscipline extends Model {
     static get tableName() {
-        return "user_discipline";
+        return "users_disciplines";
     }
 
     static get idColumn() {
