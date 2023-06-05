@@ -7,11 +7,11 @@
     "scripts": {
         "dev": "nodemon ./src/index.js",
         "start": "node ./src/index.js",
-        "migrate:make": "knex migrate:make --knexfile ./database/knexfile.js",
-        "migrate:latest": "knex migrate:latest --knexfile ./database/knexfile.js",
-        "migrate:rollback": "knex migrate:rollback --knexfile ./database/knexfile.js",
-        "seed:make": "knex seed:make --knexfile ./database/knexfile.js",
-        "seed:run": "knex seed:run --knexfile ./database/knexfile.js"
+        "migrate:make": "knex migrate:make",
+        "migrate:latest": "knex migrate:latest",
+        "migrate:rollback": "knex migrate:rollback",
+        "seed:make": "knex seed:make",
+        "seed:run": "knex seed:run"
     },
     "dependencies": {
         "cors": "2.8.5",

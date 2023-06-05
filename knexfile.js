@@ -1,9 +1,6 @@
-import path from "path";
 import dotenv from "dotenv";
-import { Model } from "objection";
 
-dotenv.config({ path: path.resolve("../.env") });
-
+dotenv.config();
 const {
     MYSQL_HOST,
     MYSQL_PORT,
@@ -11,7 +8,6 @@ const {
     MYSQL_PASS,
     MYSQL_DBNAME,
 } = process.env;
-
 const knexConfig = {
     client: "mysql2",
     debug: true,
@@ -24,15 +20,13 @@ const knexConfig = {
     },
     migrations: {
         tableName: "knex_migrations",
-        directory: "./migrations",
-        stub: "migration.stub",
+        directory: "./database/migrations",
+        stub: "./database/migration.stub",
     },
     seeds: {
-        directory: "./seeds",
-        stub: "seed.stub",
+        directory: "./database/seeds",
+        stub: "./database/seed.stub",
     },
 };
-
-Model.knex(knexConfig);
 
 export default knexConfig;
