@@ -1,6 +1,12 @@
 import cors from "cors";
 import express from "express";
+
 import appConfig from "./config/appConfig.js";
+import disciplines from "./domains/disciplines/routes.js";
+import presences from "./domains/presence/routes.js";
+import rooms from "./domains/rooms/routes.js";
+import schedules from "./domains/scheduleControl/routes.js";
+import users from "./domains/users/routes.js";
 
 import presences from "./domains/presence/routes.js";
 import schedules from "./domains/scheduleControl/routes.js";
@@ -12,6 +18,10 @@ app.use(express.json());
 
 app.use("/presence", presences);
 app.use("/schedule", schedules);
+app.use("/users", users);
+app.use("/rooms", rooms);
+app.use("/disciplines", disciplines);
+
 
 app.listen(appConfig.appPort, () => {
     // eslint-disable-next-line no-console
