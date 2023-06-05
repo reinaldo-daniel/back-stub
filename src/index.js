@@ -19,8 +19,6 @@ app.use("/schedule", schedules);
 app.use("/studentNotes", studentNote);
 app.use("/userDisciplines", userDiscipline);
 
-app.use("/studentNotes", studentNote);
-app.use("/userDisciplines", userDiscipline);
 app.listen(appConfig.appPort, () => {
     console.log(`Servidor rodando na porta ${appConfig.appPort}.`);
 });
