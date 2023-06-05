@@ -18,9 +18,8 @@ app.use(express.json());
 app.use("/presence", presences);
 app.use("/schedule", schedules);
 
-app.use("/student_notes", StudentNote);
-app.use("/user_disciplines", UserDiscipline);
+app.use("/studentNotes", StudentNote);
+app.use("/userDisciplines", UserDiscipline);
 app.listen(appConfig.appPort, () => {
-    // eslint-disable-next-line no-console
     console.log(`Servidor rodando na porta ${appConfig.appPort}.`);
 });
