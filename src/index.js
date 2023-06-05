@@ -8,6 +8,9 @@ import rooms from "./domains/rooms/routes.js";
 import schedules from "./domains/scheduleControl/routes.js";
 import users from "./domains/users/routes.js";
 
+import presences from "./domains/presence/routes.js";
+import schedules from "./domains/scheduleControl/routes.js";
+
 const app = express();
 
 app.use(cors());
@@ -18,6 +21,7 @@ app.use("/schedule", schedules);
 app.use("/users", users);
 app.use("/rooms", rooms);
 app.use("/disciplines", disciplines);
+
 
 app.listen(appConfig.appPort, () => {
     // eslint-disable-next-line no-console
