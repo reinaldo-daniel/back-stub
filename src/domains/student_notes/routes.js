@@ -3,6 +3,6 @@ import controller from "./controllers.js";
 
 const router = Router();
 
-router.get("/", controller.student_note);
+router.get("/", controller.studentNote);
 
 export default router;
