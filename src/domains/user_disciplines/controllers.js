@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-async function user_discipline(request, response, next) {
+async function userDiscipline(request, response, next) {
     try {
         response.status(200)
             .json({ teste: "acesso ao controller user_discipline." });
@@ -9,5 +9,5 @@ async function user_discipline(request, response, next) {
 }
 
 export default {
-    user_discipline,
+    userDiscipline,
 };
