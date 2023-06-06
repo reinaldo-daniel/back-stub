@@ -7,9 +7,9 @@
     "scripts": {
         "dev": "nodemon ./src/index.js",
         "start": "node ./src/index.js",
-        "migrate:make": "knex migrate:make",
-        "migrate:latest": "knex migrate:latest",
-        "migrate:rollback": "knex migrate:rollback",
+        "migrate:make": "knex migrate:make --knexfile ./database/knexfile",
+        "migrate:latest": "knex migrate:latest --knexfile ./database/knexfile",
+        "migrate:rollback": "knex migrate:rollback --knexfile ./database/knexfile",
         "seed:make": "knex seed:make",
         "seed:run": "knex seed:run"
     },

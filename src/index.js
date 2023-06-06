@@ -1,9 +1,9 @@
 import cors from "cors";
 import express from "express";
-import knex from "knex";
+import Knex from "knex";
 import { Model } from "objection";
 
-import knexConfig from "../knexfile.js";
+import knexConfig from "../database/knexfile.js";
 import appConfig from "./config/appConfig.js";
 import disciplines from "./domains/disciplines/routes.js";
 import presences from "./domains/presence/routes.js";
@@ -11,8 +11,7 @@ import rooms from "./domains/rooms/routes.js";
 import schedules from "./domains/scheduleControl/routes.js";
 import users from "./domains/users/routes.js";
 
-const knexInstance = knex(knexConfig);
-Model.knex(knexInstance);
+Model.knex(Knex(knexConfig));
 
 const app = express();
 
