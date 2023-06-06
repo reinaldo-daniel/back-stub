@@ -3,9 +3,9 @@ import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
 const filename = fileURLToPath(import.meta.url);
-const caminho = dirname(filename);
+const absolutePath = dirname(filename);
 
-dotenv.config({ path: resolve(caminho, "../../.env") });
+dotenv.config({ path: resolve(absolutePath, "../../.env") });
 
 const { env: environment } = process;
 
