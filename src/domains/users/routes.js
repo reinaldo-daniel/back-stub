@@ -4,7 +4,7 @@ import controllers from "./controllers.js";
 
 const router = Router();
 
-router.get("/", controllers.users);
+router.get("/", controllers.getUsers);
 
 router.post("/criar", controllers.createUser);
 
