@@ -18,7 +18,7 @@ const loginUserSchema = Joi.object({
         .max(200),
 });
 
-const userRegister = Joi.object({
+const adminUserCreate = Joi.object({
     name: Joi.string()
         .trim()
         .max(100)
@@ -35,25 +35,11 @@ const userRegister = Joi.object({
         .required(),
 
     type: Joi.string()
-        .valid(TYPE)
+        .valid(...Object.values(TYPE))
         .required(),
 });
 
-const userUpdatePerfil = Joi.object({
-    name: Joi.string()
-        .trim()
-        .max(100),
-
-    email: Joi.string()
-        .trim()
-        .email(),
-
-    password: Joi.string()
-        .trim()
-        .max(80),
-});
-
-const userUpdateRegister = Joi.object({
+const adminUserUpdate = Joi.object({
     name: Joi.string()
         .trim()
         .max(100),
@@ -67,14 +53,28 @@ const userUpdateRegister = Joi.object({
         .max(80),
 
     type: Joi.string()
-        .valid(TYPE),
+        .valid(...Object.values(TYPE)),
 
     situaction: Joi.boolean(),
 });
 
+const userUpdate = Joi.object({
+    name: Joi.string()
+        .trim()
+        .max(100),
+
+    email: Joi.string()
+        .trim()
+        .email(),
+
+    password: Joi.string()
+        .trim()
+        .max(80),
+});
+
 export default {
     loginUserSchema,
-    userRegister,
-    userUpdateRegister,
-    userUpdatePerfil,
+    adminUserCreate,
+    adminUserUpdate,
+    userUpdate,
 };
