@@ -2,7 +2,6 @@ import Users from "./model.js";
 
 const emailIsUsed = (async (request, response, next) => {
     const { body } = request;
-
     const { email } = body;
 
     try {
@@ -15,6 +14,7 @@ const emailIsUsed = (async (request, response, next) => {
                 response.status(400),
             );
         }
+
         response.sendStatus(204);
     } catch (error) {
         next(error);
