@@ -1,6 +1,15 @@
+import Validators from "./validators.js";
+
 async function users(request, response, next) {
+    const { body } = request;
+
     try {
-        response.json({ teste: "acessou o controller de users" });
+        const { error, value } = Validators.loginUserSchema.validate(body);
+
+        if (!value) {
+            throw new Error(error);
+        }
+        response.send(body);
     } catch (error) {
         next(error);
     }
