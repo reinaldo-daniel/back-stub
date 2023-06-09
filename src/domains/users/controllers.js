@@ -16,12 +16,13 @@ async function createUser(req, res, next) {
     try {
         const { body } = req;
         const { name, email } = body;
-        const password = bcrypt.hashSync(body.password, 10);
+
+        const saltRounds = 10;
+        const password = bcrypt.hashSync(body.password, saltRounds);
 
         const newUser = await Users
             .query()
             .insert({ name, email, password });
-
         res.status(201)
             .json(newUser);
 
