@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import Users from "./model.js";
 
 async function getUsers(req, res, next) {
@@ -11,11 +13,16 @@ async function getUsers(req, res, next) {
 
 async function createUser(req, res, next) {
     try {
-        const { name, email, password } = req.body;
+        const { body } = req;
+        const { name, email } = body;
+        const password = bcrypt.hashSync(body.password, 10);
 
-        const newUser = await Users.query().insert({ name, email, password }); // INSERT INTO users (name, email, password) VALUES (name, email, password);
+        const newUser = await Users
+            .query()
+            .insert({ name, email, password });
 
-        res.status(201).json(newUser); // Retorna o usuário criado
+        res.status(201)
+            .json(newUser);
     } catch (error) {
         next(error);
     }
