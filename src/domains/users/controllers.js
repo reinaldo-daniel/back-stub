@@ -1,11 +1,11 @@
-async function users(request, response, next) {
+async function login(request, response, next) {
     try {
-        response.json({ teste: "acessou o controller de users" });
+        response.json({ teste: "Está funcionando a rota" });
     } catch (error) {
         next(error);
     }
 }
 
 export default {
-    users,
+    login,
 };
