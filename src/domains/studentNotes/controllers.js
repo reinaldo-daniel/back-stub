@@ -8,6 +8,5 @@ async function studentNote(request, response, next) {
 }
 
 export default {
-    // eslint-disable-next-line camelcase
     studentNote,
 };

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 async function userDiscipline(request, response, next) {
     try {
         response.status(200)
