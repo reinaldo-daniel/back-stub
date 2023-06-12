@@ -12,9 +12,9 @@ async function getUsers(req, res, next) {
     }
 }
 
-async function createUser(req, res, next) {
+async function createUser(request, response, next) {
     try {
-        const { body } = req;
+        const { body } = request;
         const { name, email } = body;
 
         const saltRounds = 10;
@@ -24,7 +24,7 @@ async function createUser(req, res, next) {
             .query()
             .insert({ name, email, password });
 
-        res.status(201)
+        response.status(201)
             .json(newUser);
     } catch (error) {
         next(error);
