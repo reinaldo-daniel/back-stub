@@ -4,6 +4,6 @@ import controllers from "./controllers.js";
 
 const router = Router();
 
-router.get("/", controllers.users);
+router.post("/login", controllers.login);
 
 export default router;
