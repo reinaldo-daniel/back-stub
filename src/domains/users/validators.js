@@ -10,7 +10,9 @@ const loginUserSchema = Joi.object({
     email: Joi.string()
         .trim()
         .email()
-        .lowercase(),
+        .lowercase()
+        .email()
+        .required(),
 
     password: Joi.string()
         .trim()

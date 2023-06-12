@@ -4,12 +4,13 @@ async function users(request, response, next) {
     const { body } = request;
 
     try {
-        const { error, value } = Validators.loginUserSchema.validate(body);
+        const { error } = Validators.loginUserSchema.validate(body);
 
-        if (!value) {
+        if (error) {
             throw new Error(error);
         }
-        response.send(body);
+
+        response.send(201);
     } catch (error) {
         next(error);
     }
