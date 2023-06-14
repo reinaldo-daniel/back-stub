@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import jsonConfig from "../config/jwtConfig.js";
+import jwtConfig from "../config/jwtConfig.js";
 import Users from "../domains/users/model.js";
 import errorForbidden from "../helpers/errors/errorForbidden.js";
 
@@ -15,7 +15,7 @@ function authMiddleware(request, response, next) {
 
         const token = authorization.split(" ")[1];
 
-        return jwt.verify(token, jsonConfig.jwtSecret, async (error, decoded) => {
+        return jwt.verify(token, jwtConfig.jwtSecret, async (error, decoded) => {
             if (error) {
                 return errorForbidden(response);
             }
@@ -28,7 +28,7 @@ function authMiddleware(request, response, next) {
                 return errorForbidden(response);
             }
 
-            request.userId = user;
+            request.user = user;
 
             return next();
         });

@@ -1,11 +1,9 @@
-import dotenv from "dotenv";
-
-dotenv.config();
+import "dotenv/config";
 
 const { env: environment } = process;
 
-const jsonConfig = {
+const jwtConfig = {
     jwtSecret: environment.JWT_SECRET,
 };
 
-export default jsonConfig;
+export default jwtConfig;
