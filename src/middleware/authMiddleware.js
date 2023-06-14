@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 
 import jsonConfig from "../config/jwtConfig.js";
 import Users from "../domains/users/model.js";
+import errorForbidden from "../helpers/errors/errorForbidden.js";
 
 function authMiddleware(request, response, next) {
     try {
@@ -9,28 +10,25 @@ function authMiddleware(request, response, next) {
         const { authorization } = headers;
 
         if (!authorization) {
-            return response.status(403)
-                .json({ message: "Forbidden" });
+            return errorForbidden(response);
         }
 
         const token = authorization.split(" ")[1];
 
         return jwt.verify(token, jsonConfig.jwtSecret, async (error, decoded) => {
             if (error) {
-                return response.status(403)
-                    .json({ message: "Forbidden" });
+                return errorForbidden(response);
             }
 
-            const verifyUser = await Users.query()
+            const user = await Users.query()
                 .findById(decoded.id)
-                .where("situaction", true);
+                .where("status", true);
 
-            if (!verifyUser) {
-                return response.status(403)
-                    .json({ message: "Forbidden" });
+            if (!user) {
+                return errorForbidden(response);
             }
 
-            request.userId = decoded.id;
+            request.userId = user;
 
             return next();
         });
