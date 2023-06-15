@@ -1,4 +1,4 @@
-import databaseConfig from "../src/config/database.js";
+import databaseConfig from "../src/config/database";
 
 const {
     mysqlHost,
