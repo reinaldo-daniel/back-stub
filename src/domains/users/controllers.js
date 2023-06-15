@@ -1,4 +1,25 @@
-import Users from "./model.js";
+import jwt from "jsonwebtoken";
+
+import jwtConfig from "../../config/jwtConfig";
+import errorBadRequest from "../../errors/errorBadRequest";
+import Users from "./model";
+
+function refreshToken(request, response, next) {
+    try {
+        const { user } = request;
+
+        if (!user) {
+            return errorBadRequest(response);
+        }
+
+        const token = jwt.sign(user, jwtConfig.jwtSecret);
+
+        return response.status(200)
+            .json(token, user);
+    } catch (error) {
+        return next(error);
+    }
+}
 
 const emailIsUsed = (async (request, response, next) => {
     const { body } = request;
@@ -21,6 +42,7 @@ const emailIsUsed = (async (request, response, next) => {
     }
 });
 
-export default {
+export {
     emailIsUsed,
+    refreshToken,
 };
