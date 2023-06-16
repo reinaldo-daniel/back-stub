@@ -23,9 +23,7 @@ module.exports = {
             "error",
             200,
         ],
-        "import/extensions": ["error", "ignorePackages", {
-            js: "never",
-        }],
+        "import/extensions": "off",
         "import/no-unresolved": ["error", { ignore: ["^joi$"] }],
         "class-methods-use-this": "off",
         quotes: [
