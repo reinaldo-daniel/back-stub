@@ -1,12 +1,12 @@
 {
     "name": "projeto",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "index",
     "type": "module",
     "license": "MIT",
     "scripts": {
-        "dev": "nodemon ./src/index.js",
-        "start": "node ./src/index.js",
+        "dev": "nodemon --es-module-specifier-resolution=node ./src/index",
+        "start": "node --es-module-specifier-resolution=node ./src/index",
         "migrate:make": "knex migrate:make --knexfile ./database/knexfile",
         "migrate:latest": "knex migrate:latest --knexfile ./database/knexfile",
         "migrate:rollback": "knex migrate:rollback --knexfile ./database/knexfile",
