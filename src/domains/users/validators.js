@@ -55,7 +55,7 @@ const adminUserUpdate = Joi.object({
     type: Joi.string()
         .valid(...Object.values(TYPE)),
 
-    situaction: Joi.boolean(),
+    status: Joi.boolean(),
 });
 
 const userUpdate = Joi.object({
