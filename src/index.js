@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import Knex from "knex";
+import morgan from "morgan";
 import { Model } from "objection";
 
 import knexConfig from "../database/knexfile";
@@ -18,6 +19,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(morgan("dev"));
 
 app.use(authMiddleware);
 
@@ -28,6 +30,5 @@ app.use("/rooms", rooms);
 app.use("/disciplines", disciplines);
 
 app.listen(appConfig.appPort, () => {
-    // eslint-disable-next-line no-console
-    console.log(`Servidor rodando na porta ${appConfig.appPort}.`);
+    console.info(`Servidor rodando na porta ${appConfig.appPort}.`);
 });
