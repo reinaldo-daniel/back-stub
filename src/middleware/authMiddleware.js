@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 import jwtConfig from "../config/jwtConfig";
 import Users from "../domains/users/model";
-import errorUnauthorized from "../helpers/errors/errorUnauthorized";
+import errorUnauthorized from "../errors/errorUnauthorized";
 
 function authMiddleware(request, response, next) {
     try {

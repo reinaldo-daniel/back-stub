@@ -2,5 +2,5 @@ export default function unauthorized(response, message) {
     const messageToSend = message || "Unauthorized";
 
     response.status(401)
-        .json({ 401: messageToSend });
+        .json({ message: messageToSend });
 }

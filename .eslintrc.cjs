@@ -23,6 +23,7 @@ module.exports = {
             "error",
             200,
         ],
+        "arrow-body-style": ["error", "always"],
         "import/extensions": "off",
         "import/no-unresolved": ["error", { ignore: ["^joi$"] }],
         "class-methods-use-this": "off",
