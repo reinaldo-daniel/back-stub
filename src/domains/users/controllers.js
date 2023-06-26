@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 import jwtConfig from "../../config/jwtConfig";
 import errorBadRequest from "../../errors/errorBadRequest";
+import errorNotFound from "../../errors/errorNotFound";
 import Users from "./model.js";
 
 async function createUser(request, response, next) {
@@ -90,7 +91,7 @@ async function getUserById(request, response, next) {
         const user = await Users.query()
             .findById(id)
 
-        if (!user) return errorBadRequest(response);
+        if (!user) return errorNotFound(response)
 
         response.status(200)
             .json(user);
