@@ -9,7 +9,7 @@ export const up = function up(knex) {
         table.enum("type", ["ADM", "STUDENT", "EMPLOYEE"])
             .notNullable();
 
-        table.bool("situaction")
+        table.bool("status")
             .notNullable()
             .defaultTo(true);
 
