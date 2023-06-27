@@ -16,10 +16,9 @@ async function getUsers(req, res, next) {
 
 async function createUser(req, res, next) {
     try {
-        const { name, email, password } = req.body;
-
+        const { body } = req;
         const newUser = await Users.query()
-            .insert({ name, email, password });
+            .insert(body);
         res.status(201).json(newUser);
     } catch (error) {
         next(error);
