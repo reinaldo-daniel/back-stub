@@ -20,7 +20,6 @@ async function createUser(req, res, next) {
 
         const newUser = await Users.query()
             .insert({ name, email, password });
-
         res.status(201).json(newUser);
     } catch (error) {
         next(error);
