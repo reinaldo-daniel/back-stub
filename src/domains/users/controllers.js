@@ -100,6 +100,39 @@ async function getUserById(request, response, next) {
     }
 }
 
+async function updateUser(request, response, next) {
+    try {
+        const { params, body } = request;
+        const { id } = params;
+        const { name, email, password } = body;
+
+        const userUpdated = await Users.transaction(async transacting => {
+            const user = await Users.query()
+                .findById(id);
+
+            if (!user) return errorNotFound(response);
+
+            if (password) {
+                const isSamePass = bcrypt.compareSync(password, user.password);
+
+                if (isSamePass) {
+                    return user.$query(transacting)
+                        .updateAndFetch({ name, email })
+                }
+                const saltRounds = 10;
+                const newPassword = bcrypt.hashSync(password, saltRounds);
+
+                return user.$query(transacting)
+                    .updateAndFetch({ name, email, password: newPassword })
+            }
+        })
+        response.json(userUpdated)
+    }
+    catch (error) {
+        next(error)
+    }
+}
+
 export {
     emailIsUsed,
     refreshToken,
@@ -107,4 +140,5 @@ export {
     createUser,
     getAllUsers,
     getUserById,
+    updateUser
 };
