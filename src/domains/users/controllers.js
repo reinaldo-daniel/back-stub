@@ -19,7 +19,7 @@ async function createUser(req, res, next) {
         const { body: userData } = req;
 
         const newUser = await Users.query()
-            .insert(userData);
+            .insertAndFetch(userData);
 
         res.status(201).json(newUser);
     } catch (error) {
