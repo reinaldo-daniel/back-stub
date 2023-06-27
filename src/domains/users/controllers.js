@@ -17,13 +17,16 @@ async function getUsers(req, res, next) {
 async function createUser(req, res, next) {
     try {
         const { body: userData } = req;
+
         const newUser = await Users.query()
             .insert(userData);
+
         res.status(201).json(newUser);
     } catch (error) {
         next(error);
     }
 }
+
 function refreshToken(request, response, next) {
     try {
         const { user } = request;
@@ -49,6 +52,7 @@ async function emailIsUsed(request, response, next) {
         const user = await Users
             .query()
             .findOne({ email });
+
         if (user) {
             throw new Error(
                 "This E-mail is been used by another user.",
