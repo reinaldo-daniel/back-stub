@@ -1,6 +1,11 @@
 import dotenv from "dotenv";
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config();
+const filename = fileURLToPath(import.meta.url);
+const absolutePath = dirname(filename);
+
+dotenv.config({ path: resolve(absolutePath, "../../.env") });
 
 const { env: environment } = process;
 

@@ -23,10 +23,10 @@ module.exports = {
             "error",
             200,
         ],
-        "import/extensions": ["error", "ignorePackages", {
-            js: "always",
-        }],
+        "arrow-body-style": ["error", "always"],
+        "import/extensions": "off",
         "import/no-unresolved": ["error", { ignore: ["^joi$"] }],
+        "class-methods-use-this": "off",
         quotes: [
             "error",
             "double",

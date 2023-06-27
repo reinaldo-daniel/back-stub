@@ -1,23 +1,25 @@
 import cors from "cors";
 import express from "express";
-import knex from "knex";
+import Knex from "knex";
 import { Model } from "objection";
 
-import knexConfig from "../knexfile.js";
-import appConfig from "./config/appConfig.js";
-import disciplines from "./domains/disciplines/routes.js";
-import presences from "./domains/presence/routes.js";
-import rooms from "./domains/rooms/routes.js";
-import schedules from "./domains/scheduleControl/routes.js";
-import users from "./domains/users/routes.js";
+import knexConfig from "../database/knexfile";
+import appConfig from "./config/appConfig";
+import disciplines from "./domains/disciplines/routes";
+import presences from "./domains/presence/routes";
+import rooms from "./domains/rooms/routes";
+import schedules from "./domains/scheduleControl/routes";
+import users from "./domains/users/routes";
+import authMiddleware from "./middleware/authMiddleware";
 
-const knexInstance = knex(knexConfig);
-Model.knex(knexInstance);
+Model.knex(Knex(knexConfig));
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use(authMiddleware);
 
 app.use("/presence", presences);
 app.use("/schedule", schedules);
