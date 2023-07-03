@@ -19,6 +19,12 @@ module.exports = {
                 caseInsensitive: true,
             },
         }],
+        "no-console": [
+            "warn",
+            {
+                allow: ["info"],
+            },
+        ],
         "max-len": [
             "error",
             200,
