@@ -6,6 +6,7 @@ import jwtConfig from "../../config/jwtConfig";
 import errorBadRequest from "../../errors/errorBadRequest";
 import errorNotFound from "../../errors/errorNotFound";
 import Users from "./model.js";
+import { adminUserUpdate } from "./validators"
 
 async function createUser(request, response, next) {
     try {
@@ -102,7 +103,8 @@ async function getUserById(request, response, next) {
 
 async function updateUser(request, response, next) {
     try {
-        const { id } = params;
+        const { params, body } = request
+        const { id } = params
         const { name, email, password } = body;
 
         await adminUserUpdate.validateAsync(body);

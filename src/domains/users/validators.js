@@ -72,7 +72,7 @@ const userUpdate = Joi.object({
         .max(80),
 });
 
-export default {
+export {
     loginUserSchema,
     adminUserCreate,
     adminUserUpdate,
