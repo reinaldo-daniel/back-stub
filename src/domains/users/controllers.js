@@ -6,6 +6,7 @@ import jwtConfig from "../../config/jwtConfig";
 import errorBadRequest from "../../errors/errorBadRequest";
 import errorNotFound from "../../errors/errorNotFound";
 import Users from "./model.js";
+import { adminUserUpdate } from "./validators"
 
 async function createUser(request, response, next) {
     try {
@@ -100,6 +101,39 @@ async function getUserById(request, response, next) {
     }
 }
 
+async function updateUser(request, response, next) {
+    try {
+        const { params, body } = request
+        const { id } = params
+        const { name, email, password } = body;
+
+        await adminUserUpdate.validateAsync(body);
+
+        const userUpdated = await Users.transaction(async transacting => {
+            const dados = { name, email }
+            const user = await Users.query(transacting)
+                .findById(id);
+
+            if (!user) return errorNotFound(response);
+
+            if (password) {
+                const isSamePass = bcrypt.compareSync(password, user.password);
+
+                if (!isSamePass) {
+                    const saltRounds = 10;
+                    dados.password = bcrypt.hashSync(password, saltRounds);
+                }
+            }
+            return user.$query(transacting)
+                .updateAndFetch(dados)
+        })
+        response.status(200)
+            .json(userUpdated)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export {
     emailIsUsed,
     refreshToken,
@@ -107,4 +141,5 @@ export {
     createUser,
     getAllUsers,
     getUserById,
+    updateUser
 };
