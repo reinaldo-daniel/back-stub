@@ -11,7 +11,7 @@ import rooms from "./domains/rooms/routes";
 import schedules from "./domains/scheduleControl/routes";
 import users from "./domains/users/routes";
 import authMiddleware from "./middleware/authMiddleware";
-import reqLogMiddleware from "./middleware/reqLogMiddleware";
+import requestLogger from "./middleware/requestLogger";
 
 Model.knex(Knex(knexConfig));
 
@@ -20,7 +20,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(reqLogMiddleware);
+app.use(requestLogger);
 app.use(authMiddleware);
 
 app.use("/presence", presences);
