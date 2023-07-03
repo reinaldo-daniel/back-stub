@@ -102,12 +102,14 @@ async function getUserById(request, response, next) {
 
 async function updateUser(request, response, next) {
     try {
-        const { params, body } = request;
         const { id } = params;
         const { name, email, password } = body;
 
+        await adminUserUpdate.validateAsync(body);
+
         const userUpdated = await Users.transaction(async transacting => {
-            const user = await Users.query()
+            const dados = { name, email }
+            const user = await Users.query(transacting)
                 .findById(id);
 
             if (!user) return errorNotFound(response);
@@ -115,20 +117,17 @@ async function updateUser(request, response, next) {
             if (password) {
                 const isSamePass = bcrypt.compareSync(password, user.password);
 
-                if (isSamePass) {
-                    return user.$query(transacting)
-                        .updateAndFetch({ name, email })
+                if (!isSamePass) {
+                    const saltRounds = 10;
+                    dados.password = bcrypt.hashSync(password, saltRounds);
                 }
-                const saltRounds = 10;
-                const newPassword = bcrypt.hashSync(password, saltRounds);
-
-                return user.$query(transacting)
-                    .updateAndFetch({ name, email, password: newPassword })
             }
+            return user.$query(transacting)
+                .updateAndFetch(dados)
         })
-        response.json(userUpdated)
-    }
-    catch (error) {
+        response.status(200)
+            .json(userUpdated)
+    } catch (error) {
         next(error)
     }
 }

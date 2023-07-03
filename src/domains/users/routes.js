@@ -10,6 +10,6 @@ router.post("/create", createUser);
 router.get("/list-users", getAllUsers);
 router.get("/list-users/:id", getUserById);
 router.post("/login", login);
-router.post("/update/:id", updateUser);
+router.put("/update/:id", updateUser);
 
 export default router;
