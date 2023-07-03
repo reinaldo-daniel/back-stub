@@ -4,6 +4,30 @@ import jwtConfig from "../../config/jwtConfig";
 import errorBadRequest from "../../errors/errorBadRequest";
 import Users from "./model";
 
+async function getUsers(req, res, next) {
+    try {
+        const users = await Users.query();
+
+        res.json(users);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function createUser(req, res, next) {
+    try {
+        const { body: userData } = req;
+
+        const newUser = await Users.query()
+            .insertAndFetch(userData);
+
+        res.status(201)
+            .json(newUser);
+    } catch (error) {
+        next(error);
+    }
+}
+
 function refreshToken(request, response, next) {
     try {
         const { user } = request;
@@ -29,6 +53,7 @@ async function emailIsUsed(request, response, next) {
         const user = await Users
             .query()
             .findOne({ email });
+
         if (user) {
             throw new Error(
                 "This E-mail is been used by another user.",
@@ -54,4 +79,6 @@ export {
     emailIsUsed,
     refreshToken,
     login,
+    getUsers,
+    createUser,
 };
