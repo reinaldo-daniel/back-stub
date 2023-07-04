@@ -6,7 +6,7 @@ const TYPE = {
     EMPLOYEE: "EMPLOYEE",
 };
 
-const loginUserSchema = Joi.object({
+export const loginUserSchema = Joi.object({
     email: Joi.string()
         .trim()
         .email()
@@ -18,7 +18,7 @@ const loginUserSchema = Joi.object({
         .max(200),
 });
 
-const adminUserCreate = Joi.object({
+export const adminUserCreate = Joi.object({
     name: Joi.string()
         .trim()
         .max(100)
@@ -39,7 +39,7 @@ const adminUserCreate = Joi.object({
         .required(),
 });
 
-const adminUserUpdate = Joi.object({
+export const adminUserUpdate = Joi.object({
     name: Joi.string()
         .trim()
         .max(100),
@@ -58,7 +58,7 @@ const adminUserUpdate = Joi.object({
     status: Joi.boolean(),
 });
 
-const userUpdate = Joi.object({
+export const userUpdate = Joi.object({
     name: Joi.string()
         .trim()
         .max(100),
@@ -71,10 +71,3 @@ const userUpdate = Joi.object({
         .trim()
         .max(80),
 });
-
-export default {
-    loginUserSchema,
-    adminUserCreate,
-    adminUserUpdate,
-    userUpdate,
-};

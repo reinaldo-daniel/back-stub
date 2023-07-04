@@ -1,9 +1,12 @@
 import bcrypt from "bcrypt";
+import Joi from "joi";
 import jwt from "jsonwebtoken";
+import { transaction } from "objection";
 
 import jwtConfig from "../../config/jwtConfig";
 import errorBadRequest from "../../errors/errorBadRequest";
 import Users from "./model.js";
+import { adminUserCreate } from "./validators";
 
 async function getUsers(req, res, next) {
     try {
@@ -18,14 +21,15 @@ async function getUsers(req, res, next) {
 async function createUser(request, response, next) {
     try {
         const { body } = request;
-        const { name, email } = body;
+        const { name, email, password } = body;
+
+        Joi.validate(body, adminUserCreate);
 
         const saltRounds = 10;
-        const password = bcrypt.hashSync(body.password, saltRounds);
+        const passwordHash = bcrypt.hashSync(password, saltRounds);
 
-        const newUser = await Users
-            .query()
-            .insert({ name, email, password });
+        const newUser = await Users.query(transaction)
+            .insert({ name, email, password: passwordHash });
 
         response.status(201)
             .json(newUser);
