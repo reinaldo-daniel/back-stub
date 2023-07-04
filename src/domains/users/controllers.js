@@ -1,8 +1,42 @@
+import bcrypt from "bcrypt";
+import Joi from "joi";
 import jwt from "jsonwebtoken";
+import { transaction } from "objection";
 
 import jwtConfig from "../../config/jwtConfig";
 import errorBadRequest from "../../errors/errorBadRequest";
-import Users from "./model";
+import Users from "./model.js";
+import { adminUserCreate } from "./validators";
+
+async function getUsers(req, res, next) {
+    try {
+        const users = await Users.query();
+
+        res.json(users);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function createUser(request, response, next) {
+    try {
+        const { body } = request;
+        const { name, email, password } = body;
+
+        Joi.validate(body, adminUserCreate);
+
+        const saltRounds = 10;
+        const passwordHash = bcrypt.hashSync(password, saltRounds);
+
+        const newUser = await Users.query(transaction)
+            .insert({ name, email, password: passwordHash });
+
+        response.status(201)
+            .json(newUser);
+    } catch (error) {
+        next(error);
+    }
+}
 
 async function getUsers(req, res, next) {
     try {
@@ -76,6 +110,8 @@ async function login(request, response, next) {
 }
 
 export {
+    getUsers,
+    createUser,
     emailIsUsed,
     refreshToken,
     login,
